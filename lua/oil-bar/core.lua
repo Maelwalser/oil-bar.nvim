@@ -1,8 +1,7 @@
 local M = {}
 
-
 ---
--- custom <CR> action logic
+-- custom <CR> action 
 ---
 function M.sidebar_cr_action()
   local oil = require("oil")
@@ -15,7 +14,7 @@ function M.sidebar_cr_action()
     return
   end
 
-  -- IF we are in the sidebar, use sidebar logic
+  -- in the sidebar
   if ok and is_sidebar then
     if entry.type == "directory" then
       oil.select() -- Navigate *in* the sidebar
@@ -29,7 +28,7 @@ function M.sidebar_cr_action()
     vim.cmd('wincmd l') -- Move to window on the right
     local target_win_id = vim.api.nvim_get_current_win()
 
-    -- If we are still in the sidebar
+    -- If we are still in the sidebar (it was the rightmost window)
     if target_win_id == sidebar_win_id then
       vim.cmd('vsplit') -- Create a new window to the right
     end
@@ -37,14 +36,14 @@ function M.sidebar_cr_action()
     vim.cmd('edit ' .. vim.fn.fnameescape(filepath))
     vim.api.nvim_set_current_win(sidebar_win_id) -- Focus back on sidebar
 
-  -- ELSE in a normal oil window use default behavior
+  -- in a normal oil window, so use default behavior
   else
-    oil.select() -- This is "actions.select"
+    oil.select()
   end
 end
 
 ---
--- sidebar toggle 
+-- The sidebar toggle logic.
 ---
 function M.toggle()
   local sidebar_win = nil
@@ -81,7 +80,7 @@ function M.toggle()
     -- If we're already in oil, open the cwd
     require("oil").open(vim.fn.getcwd())
   else
-    -- Otherwise, open oil 
+    -- Otherwise, open oil (respecting cwd of original window)
     require("oil").open()
   end
 
