@@ -1,12 +1,11 @@
 local M = {}
 
 ---
--- custom <CR> action 
+-- This is the custom "smart" <CR> action logic.
 ---
 function M.sidebar_cr_action()
   local oil = require("oil")
   local current_win = vim.api.nvim_get_current_win()
-  -- Check if we are in the "sidebar" window
   local ok, is_sidebar = pcall(vim.api.nvim_win_get_var, current_win, 'oil_sidebar')
 
   local entry = oil.get_cursor_entry()
@@ -14,7 +13,6 @@ function M.sidebar_cr_action()
     return
   end
 
-  -- in the sidebar
   if ok and is_sidebar then
     if entry.type == "directory" then
       oil.select() -- Navigate *in* the sidebar
@@ -24,21 +22,15 @@ function M.sidebar_cr_action()
     -- It's a file, open it to the right
     local filepath = oil.get_current_dir() .. entry.name
     local sidebar_win_id = current_win
-
-    vim.cmd('wincmd l') -- Move to window on the right
+    vim.cmd('wincmd l')
     local target_win_id = vim.api.nvim_get_current_win()
-
-    -- If we are still in the sidebar (it was the rightmost window)
     if target_win_id == sidebar_win_id then
-      vim.cmd('vsplit') -- Create a new window to the right
+      vim.cmd('vsplit')
     end
-
     vim.cmd('edit ' .. vim.fn.fnameescape(filepath))
-    vim.api.nvim_set_current_win(sidebar_win_id) -- Focus back on sidebar
-
-  -- in a normal oil window, so use default behavior
+    vim.api.nvim_set_current_win(sidebar_win_id)
   else
-    oil.select()
+    oil.select() -- This is "actions.select"
   end
 end
 
@@ -60,35 +52,25 @@ function M.toggle()
     if win_count > 1 then
       vim.api.nvim_win_close(sidebar_win, false)
     else
-      -- If it's the last window, close oil and open an empty buffer
       pcall(vim.api.nvim_win_del_var, sidebar_win, 'oil_sidebar')
       vim.cmd("enew")
     end
     return
   end
 
-  -- No sidebar found, create one
   local original_win = vim.api.nvim_get_current_win()
   vim.cmd("vsplit")
-  vim.cmd("wincmd H") -- Move to the far left
+  vim.cmd("wincmd H")
   vim.cmd("vertical resize 30")
-
   local original_buf = vim.api.nvim_win_get_buf(original_win)
   local original_ft = vim.api.nvim_buf_get_option(original_buf, 'filetype')
-
   if original_ft == 'oil' then
-    -- If we're already in oil, open the cwd
     require("oil").open(vim.fn.getcwd())
   else
-    -- Otherwise, open oil (respecting cwd of original window)
     require("oil").open()
   end
-
-  -- Tag the new window as our sidebar
   local new_sidebar_win = vim.api.nvim_get_current_win()
   vim.api.nvim_win_set_var(new_sidebar_win, 'oil_sidebar', true)
-
-  -- Focus back on the original window if it wasn't oil
   if original_ft ~= 'oil' then
     vim.api.nvim_set_current_win(original_win)
   end
