@@ -41,7 +41,7 @@ return {
 Once installed, the plugin provides new behaviors.
 
 **Global**
-- Press <leader>e (or your custom keymap) to toggle the oil.nvim sidebar on and off.
+- Press \<leader>e (or your custom keymap) to toggle the oil.nvim sidebar on and off.
 
 **In the Oil Sidebar**
 - Place your cursor on a directory and press <CR> to navigate into that directory within the sidebar.
