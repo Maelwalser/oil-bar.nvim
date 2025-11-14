@@ -3,6 +3,10 @@ An extension for [stevearc/oil.nvim](https://github.com/stevearc/oil.nvim) that 
 
 ## Features
 
+https://github.com/user-attachments/assets/9ef89f96-75f9-473c-a261-8b43a9fb9ee2
+
+
+
 - **Persistent Sidebar Toggle**: A simple command (<leader>e by default) to open and close oil.nvim in a persistent vertical split on the far left.
 
 - **Context-Aware Navigation**: The <CR> keymap is enhanced to be "sidebar-aware":
@@ -13,9 +17,9 @@ An extension for [stevearc/oil.nvim](https://github.com/stevearc/oil.nvim) that 
 
 - **Intelligent File Opening**: Files opened from the sidebar are automatically opened in a window to the right, creating a new vertical split if one doesn't already exist.
 
-**Focus Retention**: When opening a file from the sidebar, focus immediately returns to the sidebar, allowing you to continue browsing without interruption.
+- **Focus Retention**: When opening a file from the sidebar, focus immediately returns to the sidebar, allowing you to continue browsing without interruption.
 
-**Decoupled Configuration**: This plugin does not manage or override your personal oil.nvim configuration. It simply adds the toggle functionality and the smart <CR> keymap.
+- **Decoupled Configuration**: This plugin does not manage or override your personal oil.nvim configuration. It simply adds the toggle functionality and the smart <CR> keymap.
 
 ## Requirements
 - neovim/nvim-lsp (v0.8+)
