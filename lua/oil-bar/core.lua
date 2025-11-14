@@ -1,24 +1,5 @@
 local M = {}
 
----
--- Default configuration for the sidebar
----
-M.defaults = {
-  default_file_explorer = true,
-  columns = {
-    "icon",
-  },
-  win_options = {
-    wrap = false,
-    signcolumn = "no",
-    cursorcolumn = false,
-    foldcolumn = "0",
-    spell = false,
-    list = false,
-    conceallevel = 3,
-    concealcursor = "nvic",
-  },
-}
 
 ---
 -- custom <CR> action logic
