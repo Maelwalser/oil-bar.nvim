@@ -3,9 +3,7 @@ An extension for [stevearc/oil.nvim](https://github.com/stevearc/oil.nvim) that 
 
 ## Features
 
-https://github.com/user-attachments/assets/9ef89f96-75f9-473c-a261-8b43a9fb9ee2
-
-
+https://github.com/user-attachments/assets/cb871b7f-7c00-4d0e-b93d-fa77274c521c
 
 - **Persistent Sidebar Toggle**: A simple command (<leader>e by default) to open and close oil.nvim in a persistent vertical split on the far left.
 
