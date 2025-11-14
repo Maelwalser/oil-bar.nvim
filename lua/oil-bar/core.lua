@@ -1,7 +1,7 @@
 local M = {}
 
 ---
--- This is the custom "smart" <CR> action logic.
+-- This is the custom <CR> action logic.
 ---
 function M.sidebar_cr_action()
   local oil = require("oil")

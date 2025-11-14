@@ -12,13 +12,13 @@ function M.setup(opts)
   -- Set the global toggle keymap
   vim.keymap.set("n", toggle_keymap, core.toggle, { desc = "Toggle file explorer" })
 
-  -- Create an autocommand to apply the "smart" <CR> keymap
+  -- Create an autocommand to apply the <CR> keymap
   local augroup = vim.api.nvim_create_augroup("OilBarSetup", { clear = true })
   vim.api.nvim_create_autocmd("FileType", {
     pattern = "oil",
     group = augroup,
     callback = function(args)
-      -- This keymap overrides oil's default <CR>
+      -- overrides oil's default <CR>
       vim.keymap.set("n", "<CR>", core.sidebar_cr_action, {
         buffer = args.buf,
         desc = "Open file or folder (sidebar aware)",
